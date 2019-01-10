@@ -13,8 +13,8 @@
             android:id="@+id/progress"
             app:outerProgress="40"
             app:innerProgress="40"
-            app:outerProgressColor="#33cccc"
-            android:text="Hello World!"
+            app:centerProgress="40"
+            app:useRoundedCorner="true"
     />
 
 </RelativeLayout>

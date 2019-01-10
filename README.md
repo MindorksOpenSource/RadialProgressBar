@@ -1,3 +1,3 @@
-### RadialCircBar
+### RadialCircularBar
 
 #### Work in Progress

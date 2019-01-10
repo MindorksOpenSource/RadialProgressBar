@@ -12,6 +12,6 @@
     <attr name="innerProgressColor" format="color"/>
 
     <!-- Common Attrs-->
-    <attr name="isRoundedCorner" format="boolean"/>
+    <attr name="useRoundedCorner" format="boolean"/>
 </declare-styleable>
 </resources>
