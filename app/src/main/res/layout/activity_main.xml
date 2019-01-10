@@ -15,6 +15,10 @@
             app:innerProgress="40"
             app:centerProgress="40"
             app:useRoundedCorner="true"
+            app:centerProgressStartAngle="270"
+            app:innerProgressStartAngle="270"
+            app:isAnimationOn="true"
+            app:outerProgressStartAngle="270"
     />
 
 </RelativeLayout>

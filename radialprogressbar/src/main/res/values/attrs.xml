@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<declare-styleable name="RadialProgressBar">
-    <!--outer view-->
-    <attr name="outerProgress" format="integer"/>
-    <attr name="outerProgressColor" format="color"/>
-    <!--center view-->
-    <attr name="centerProgress" format="integer"/>
-    <attr name="centerProgressColor" format="color"/>
-    <!--inner view-->
-    <attr name="innerProgress" format="integer"/>
-    <attr name="innerProgressColor" format="color"/>
+    <declare-styleable name="RadialProgressBar">
+        <!--outer view-->
+        <attr name="outerProgress" format="integer"/>
+        <attr name="outerProgressColor" format="color"/>
+        <attr name="outerProgressStartAngle" format="integer"/>
+        <!--center view-->
+        <attr name="centerProgress" format="integer"/>
+        <attr name="centerProgressColor" format="color"/>
+        <attr name="centerProgressStartAngle" format="integer"/>
 
-    <!-- Common Attrs-->
-    <attr name="useRoundedCorner" format="boolean"/>
-</declare-styleable>
+        <!--inner view-->
+        <attr name="innerProgress" format="integer"/>
+        <attr name="innerProgressColor" format="color"/>
+        <attr name="innerProgressStartAngle" format="integer"/>
+
+
+        <!-- Common Attrs-->
+        <attr name="useRoundedCorner" format="boolean"/>
+        <attr name="isAnimationOn" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 
@@ -30,12 +29,13 @@ class RadialProgressBar : View {
 
 
     //Common Things
+    private var isAnimationOn = true
     private var mRoundedCorners = true
     private val mMaxSweepAngle = 360f
 
 
     //Data of the Outer View
-    private var mStartAngleOuterView = -90
+    private var mStartAngleOuterView = 270
     private var mOuterProgress = 30
     private var mSweepAngleOuterView = 0
     private var mAnimationDurationOuterView = 400
@@ -44,7 +44,7 @@ class RadialProgressBar : View {
     private var mPaintOuterView = Paint(Paint.ANTI_ALIAS_FLAG)
 
     //Data of the Center View
-    private var mStartAngleCenterView = -90
+    private var mStartAngleCenterView = 270
     private var mSweepAngleCenterView = 0
     private var mAnimationDurationCenterView = 400
     private var mMaxProgressCenterView = 100
@@ -54,7 +54,7 @@ class RadialProgressBar : View {
 
 
     //Data of the Inner View
-    private var mStartAngleInnerView = -90
+    private var mStartAngleInnerView = 270
     private var mSweepAngleInnerView = 0
     private var mInnerProgress = 30
     private var mAnimationDurationInnerView = 400
@@ -78,9 +78,16 @@ class RadialProgressBar : View {
         mInnerProgress = a.getInteger(R.styleable.RadialProgressBar_innerProgress, mInnerProgress)
         mProgressColorInnerView = a.getColor(R.styleable.RadialProgressBar_innerProgressColor, mProgressColorInnerView)
         mCenterProgress = a.getInteger(R.styleable.RadialProgressBar_centerProgress, mCenterProgress)
-        mProgressColorCenterView = a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
-        mRoundedCorners = a.getBoolean(R.styleable.RadialProgressBar_useRoundedCorner,mRoundedCorners)
+        mProgressColorCenterView =
+                a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
+        mRoundedCorners = a.getBoolean(R.styleable.RadialProgressBar_useRoundedCorner, mRoundedCorners)
+        isAnimationOn = a.getBoolean(R.styleable.RadialProgressBar_isAnimationOn, isAnimationOn)
+        mStartAngleOuterView = a.getInteger(R.styleable.RadialProgressBar_outerProgressStartAngle, mStartAngleOuterView)
+        mStartAngleCenterView =
+                a.getInteger(R.styleable.RadialProgressBar_centerProgressStartAngle, mStartAngleCenterView)
+        mStartAngleInnerView = a.getInteger(R.styleable.RadialProgressBar_innerProgressStartAngle, mStartAngleInnerView)
         a.recycle()
+        setAnimationInProgressView(isAnimationOn)
         setOuterProgress(mOuterProgress)
         setOuterProgressColor(mProgressColorOuterView)
         setInnerProgress(mInnerProgress)
@@ -88,6 +95,17 @@ class RadialProgressBar : View {
         setCenterProgress(mCenterProgress)
         setCenterProgressColor(mProgressColorCenterView)
         useRoundedCorners(mRoundedCorners)
+        setStartAngleCenterView(mStartAngleCenterView)
+        setStartAngleInnerView(mStartAngleInnerView)
+        setStartAngleOuterView(mStartAngleOuterView)
+    }
+
+    private fun setAnimationInProgressView(animationOn: Boolean) {
+        if (!animationOn) {
+            mAnimationDurationOuterView = 0
+            mAnimationDurationInnerView = 0
+            mAnimationDurationCenterView = 0
+        }
     }
 
     private fun drawInnerCircle(canvas: Canvas?) {
@@ -162,6 +180,39 @@ class RadialProgressBar : View {
         return this.mOuterProgress
     }
 
+    fun getInnerProgress(): Int {
+        return this.mInnerProgress
+    }
+
+    fun getCenterProgress(): Int {
+        return this.mCenterProgress
+    }
+
+    fun getStartAngleOuterView(): Int {
+        return this.mStartAngleOuterView
+    }
+
+    fun getStartAngleInnerView(): Int {
+        return this.mStartAngleInnerView
+    }
+
+    fun getStartAngleCenterView(): Int {
+        return this.mStartAngleCenterView
+    }
+
+    fun setStartAngleCenterView(angle: Int) {
+        mStartAngleCenterView = angle
+    }
+
+    fun setStartAngleOuterView(angle: Int) {
+        mStartAngleOuterView = angle
+    }
+
+    fun setStartAngleInnerView(angle: Int) {
+        mStartAngleInnerView = angle
+    }
+
+
     fun setOuterProgress(progress: Int) {
         if (progress != 0) mOuterProgress = progress
         val animator =
@@ -209,7 +260,8 @@ class RadialProgressBar : View {
 
     fun setCenterProgress(progress: Int) {
         if (progress != 0) mCenterProgress = progress
-        val animator = ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
+        val animator =
+            ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationCenterView.toLong()
         animator.addUpdateListener { valueAnimator ->
