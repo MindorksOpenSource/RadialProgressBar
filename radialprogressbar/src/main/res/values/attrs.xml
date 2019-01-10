@@ -5,15 +5,18 @@
         <attr name="outerProgress" format="integer"/>
         <attr name="outerProgressColor" format="color"/>
         <attr name="outerProgressStartAngle" format="integer"/>
+        <attr name="outerMaxProgress" format="integer"/>
         <!--center view-->
         <attr name="centerProgress" format="integer"/>
         <attr name="centerProgressColor" format="color"/>
         <attr name="centerProgressStartAngle" format="integer"/>
+        <attr name="centerMaxProgress" format="integer"/>
 
         <!--inner view-->
         <attr name="innerProgress" format="integer"/>
         <attr name="innerProgressColor" format="color"/>
         <attr name="innerProgressStartAngle" format="integer"/>
+        <attr name="innerMaxProgress" format="integer"/>
 
 
         <!-- Common Attrs-->

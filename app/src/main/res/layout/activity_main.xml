@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent" android:layout_height="match_parent"
-        android:background="#000"
+        android:background="#fff"
         tools:context=".MainActivity">
 
 
@@ -11,13 +11,13 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:id="@+id/progress"
-            app:outerProgress="40"
-            app:innerProgress="40"
-            app:centerProgress="40"
             app:useRoundedCorner="true"
             app:centerProgressStartAngle="270"
             app:innerProgressStartAngle="270"
-            app:isAnimationOn="true"
+            app:innerMaxProgress="2000"
+            app:outerMaxProgress="200"
+            app:centerMaxProgress="500"
+            app:isAnimationOn="false"
             app:outerProgressStartAngle="270"
     />
 

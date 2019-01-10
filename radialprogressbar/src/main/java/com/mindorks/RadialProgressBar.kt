@@ -36,7 +36,7 @@ class RadialProgressBar : View {
 
     //Data of the Outer View
     private var mStartAngleOuterView = 270
-    private var mOuterProgress = 30
+    private var mOuterProgress = 0
     private var mSweepAngleOuterView = 0
     private var mAnimationDurationOuterView = 400
     private var mMaxProgressOuterView = 100
@@ -48,7 +48,7 @@ class RadialProgressBar : View {
     private var mSweepAngleCenterView = 0
     private var mAnimationDurationCenterView = 400
     private var mMaxProgressCenterView = 100
-    private var mCenterProgress = 30
+    private var mCenterProgress = 0
     private var mProgressColorCenterView = Color.parseColor("#c2ff07")
     private var mPaintCenterView = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -56,7 +56,7 @@ class RadialProgressBar : View {
     //Data of the Inner View
     private var mStartAngleInnerView = 270
     private var mSweepAngleInnerView = 0
-    private var mInnerProgress = 30
+    private var mInnerProgress = 0
     private var mAnimationDurationInnerView = 400
     private var mMaxProgressInnerView = 100
     private var mProgressColorInnerView = Color.parseColor("#0dffab")
@@ -86,8 +86,14 @@ class RadialProgressBar : View {
         mStartAngleCenterView =
                 a.getInteger(R.styleable.RadialProgressBar_centerProgressStartAngle, mStartAngleCenterView)
         mStartAngleInnerView = a.getInteger(R.styleable.RadialProgressBar_innerProgressStartAngle, mStartAngleInnerView)
+        mMaxProgressOuterView = a.getInteger(R.styleable.RadialProgressBar_outerMaxProgress, mMaxProgressOuterView)
+        mMaxProgressInnerView = a.getInteger(R.styleable.RadialProgressBar_innerMaxProgress, mMaxProgressInnerView)
+        mMaxProgressCenterView = a.getInteger(R.styleable.RadialProgressBar_centerMaxProgress, mMaxProgressCenterView)
         a.recycle()
         setAnimationInProgressView(isAnimationOn)
+        setMaxProgressOuterView(mMaxProgressOuterView)
+        setMaxProgressInnerView(mMaxProgressInnerView)
+        setMaxProgressCenterView(mMaxProgressCenterView)
         setOuterProgress(mOuterProgress)
         setOuterProgressColor(mProgressColorOuterView)
         setInnerProgress(mInnerProgress)
@@ -100,20 +106,13 @@ class RadialProgressBar : View {
         setStartAngleOuterView(mStartAngleOuterView)
     }
 
-    private fun setAnimationInProgressView(animationOn: Boolean) {
-        if (!animationOn) {
-            mAnimationDurationOuterView = 0
-            mAnimationDurationInnerView = 0
-            mAnimationDurationCenterView = 0
-        }
-    }
 
     private fun drawInnerCircle(canvas: Canvas?) {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
         val stroke = (diameter / 8).toFloat()
-        val addVal = (stroke * 2) + 4f
-        val subVal = ((stroke * 2) + paddingView + 4f)
+        val addVal = (stroke * 2) + 8f
+        val subVal = ((stroke * 2) + paddingView + 8f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintInnerView.color = mProgressColorInnerView
         mPaintInnerView.strokeWidth = stroke
@@ -129,8 +128,8 @@ class RadialProgressBar : View {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
         val stroke = (diameter / 8).toFloat()
-        val addVal = stroke + 2f
-        val subVal = (stroke + paddingView + 2f)
+        val addVal = stroke + 4f
+        val subVal = (stroke + paddingView + 4f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintCenterView.color = mProgressColorCenterView
         mPaintCenterView.strokeWidth = stroke
@@ -200,18 +199,47 @@ class RadialProgressBar : View {
         return this.mStartAngleCenterView
     }
 
+    fun getMaxProgressInnerView(): Int {
+        return this.mMaxProgressInnerView
+    }
+
+    fun getMaxProgressOuterView(): Int {
+        return this.mMaxProgressOuterView
+    }
+
+    fun getMaxProgressCenterView(): Int {
+        return this.mMaxProgressCenterView
+    }
+
     fun setStartAngleCenterView(angle: Int) {
         mStartAngleCenterView = angle
+        invalidate()
     }
 
     fun setStartAngleOuterView(angle: Int) {
         mStartAngleOuterView = angle
+        invalidate()
     }
 
     fun setStartAngleInnerView(angle: Int) {
         mStartAngleInnerView = angle
+        invalidate()
     }
 
+    fun setMaxProgressOuterView(max: Int) {
+        mMaxProgressOuterView = max
+        invalidate()
+    }
+
+    fun setMaxProgressInnerView(max: Int) {
+        mMaxProgressInnerView = max
+        invalidate()
+    }
+
+    fun setMaxProgressCenterView(max: Int) {
+        mMaxProgressCenterView = max
+        invalidate()
+    }
 
     fun setOuterProgress(progress: Int) {
         if (progress != 0) mOuterProgress = progress
@@ -233,8 +261,30 @@ class RadialProgressBar : View {
         invalidate()
     }
 
+    private fun setAnimationInProgressView(animationOn: Boolean) {
+        if (!animationOn) {
+            mAnimationDurationOuterView = 0
+            mAnimationDurationInnerView = 0
+            mAnimationDurationCenterView = 0
+        }
+    }
+
     fun useRoundedCorners(roundedCorners: Boolean) {
         mRoundedCorners = roundedCorners
+        invalidate()
+    }
+
+    fun setProgressValues(innerProgress: Int, centerProgress: Int, outerProgress: Int) {
+        setInnerProgress(innerProgress)
+        setCenterProgress(centerProgress)
+        setOuterProgress(outerProgress)
+        invalidate()
+
+    }
+    fun setMaxProgressValues(innerProgress: Int, centerProgress: Int, outerProgress: Int) {
+        setMaxProgressInnerView(innerProgress)
+        setMaxProgressCenterView(centerProgress)
+        setMaxProgressOuterView(outerProgress)
         invalidate()
     }
 
