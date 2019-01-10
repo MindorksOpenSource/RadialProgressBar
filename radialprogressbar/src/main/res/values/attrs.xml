@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<declare-styleable name="RadialProgressBar">
+    <!--outer view-->
+    <attr name="outerProgress" format="integer"/>
+    <attr name="outerProgressColor" format="color"/>
+    <!--center view-->
+    <attr name="centerProgress" format="integer"/>
+    <attr name="centerProgressColor" format="color"/>
+    <!--inner view-->
+    <attr name="innerProgress" format="integer"/>
+    <attr name="innerProgressColor" format="color"/>
+
+    <!-- Common Attrs-->
+    <attr name="isRoundedCorner" format="boolean"/>
+</declare-styleable>
+</resources>
