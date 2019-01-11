@@ -20,6 +20,7 @@
             app:centerMaxProgress="500"
             app:hasEmptyProgressBar="true"
             app:isAnimationOn="true"
+            app:innerProgress="1000"
             app:outerProgressStartAngle="270"
             app:centerProgress="50"
     />
