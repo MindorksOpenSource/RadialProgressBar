@@ -2,9 +2,11 @@
 
 # Radial Progress Bar
 
-Radial ProgressBar inspired  bu Apple Watch OS. It is highly Customisable <br/>
-![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/1.jpg)
-![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/2.jpg)
+Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
+With Empty Background ProgressView             |  Without Empty Background ProgressView
+:---------------------------------------------:|:----------------------------------------:
+![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/1.jpg) |  ![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/2.jpg)
+
 
 ## Getting Started
 
