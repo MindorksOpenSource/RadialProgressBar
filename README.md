@@ -3,9 +3,7 @@
 # Radial Progress Bar
 
 Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
-With Empty Background ProgressView             |  Without Empty Background ProgressView
-:---------------------------------------------:|:----------------------------------------:
-![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/1.jpg) |  ![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/2.jpg)
+<img  width="200" height="200" src="https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/1.jpg"> <img  width="200" height="200" src="https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/2.jpg">
 
 
 ## Getting Started
