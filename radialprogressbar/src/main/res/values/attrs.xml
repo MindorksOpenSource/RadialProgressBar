@@ -22,5 +22,6 @@
         <!-- Common Attrs-->
         <attr name="useRoundedCorner" format="boolean"/>
         <attr name="isAnimationOn" format="boolean"/>
+        <attr name="hasElevation" format="boolean"/>
     </declare-styleable>
 </resources>
