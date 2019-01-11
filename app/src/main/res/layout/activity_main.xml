@@ -15,6 +15,7 @@
             app:innerMaxProgress="100"
             app:outerMaxProgress="100"
             app:centerMaxProgress="100"
+            app:hasEmptyProgressBar="false"
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"

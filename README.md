@@ -59,8 +59,26 @@ thats it and how you can use the RadialProgressView in your project.
 
 #### To Customise it according to your need you can use,
 
-| Feature                                   | XML                              | Activity (Java/Koltin)        |Default Value|
+| Feature                                   | XML                              | Activity (Java/Koltin)        |Default|
 | :-------------                         |:-------------                           | :-----            |:----
-|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|rpb.setStartAngleCenterView(0/90/180/270)|270|
 |Set Start Angle OuterView|app:outerProgressStartAngle="0/90/180/270"|rpb.setStartAngleOuterView(0/90/180/270)|270|
+|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|rpb.setStartAngleCenterView(0/90/180/270)|270|
 |Set Start Angle InnerView|app:innerProgressStartAngle="0/90/180/270"|rpb.setStartAngleInnerView(0/90/180/270)|270|
+|Set EmptyProgressColorOuterView|app:outerEmptyProgressColor="color"|rpb.setEmptyProgressColorOuterView(color)|#F5F5F5|
+|Set EmptyProgressColorCenterView|app:centerEmptyProgressColor="color"|rpb.setEmptyProgressColorCenterView(color)|#F5F5F5|
+|Set EmptyProgressColorInnerView|app:innerEmptyProgressColor="color"|rpb.setEmptyProgressColorInnerView(color)|#F5F5F5|
+|Set MaxProgressOuterView|app:outerMaxProgress="Integer"|rpb.setMaxProgressOuterView(Integer)|100|
+|Set MaxProgressCenterView|app:centerMaxProgress="Integer"|rpb.setMaxProgressCenterView(Integer)|100|
+|Set MaxProgressInnerView|app:innerMaxProgress="Integer"|rpb.setMaxProgressInnerView(Integer)|100|
+|Set OuterProgress|app:outerProgress="Integer"|rpb.setOuterProgress(Integer)|0|
+|Set CenterProgress|app:centerProgress="Integer"|rpb.setCenterProgress(Integer)|0|
+|Set InnerProgress|app:innerProgress="Integer"|rpb.setInnerProgress(Integer)|0|
+|Set OuterProgressColor|app:outerProgressColor="color"|rpb.setOuterProgressColor(color)|#f52e67|
+|Set CenterProgressColor|app:centerProgressColor="color"|rpb.setCenterProgressColor(color)|#c2ff07|
+|Set InnerProgressColor|app:innerProgressColor="color"|rpb.setInnerProgressColor(color)|#0dffab|
+|Set Elevation|app:hasElevation="true/false"|rpb.hasElevation(true/false)|false|
+|Set EmptyProgressBar|app:hasEmptyProgressBar="true/false"|rpb.hasEmptyProgressBar(true/false)|false|
+|Set Animation|app:isAnimationOn="true/false"|rpb.setAnimationInProgressView(true/false)|true|
+|Set RoundedCorner|app:useRoundedCorners="true/false"|rpb.useRoundedCorners(true/false)|true|
+|Set ProgressValues|----|rpb.setProgressValues(int,int,int)|----|
+|Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
