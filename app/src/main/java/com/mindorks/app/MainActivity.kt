@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         progress.setMaxProgressValues(150,150,150)
         progress.setProgressValues(100,100,100)
-        progress.hasElevation( true)
+
 
     }
 }

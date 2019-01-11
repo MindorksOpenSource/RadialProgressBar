@@ -6,22 +6,27 @@
         <attr name="outerProgressColor" format="color"/>
         <attr name="outerProgressStartAngle" format="integer"/>
         <attr name="outerMaxProgress" format="integer"/>
+        <attr name="outerEmptyProgressColor" format="color"/>
         <!--center view-->
         <attr name="centerProgress" format="integer"/>
         <attr name="centerProgressColor" format="color"/>
         <attr name="centerProgressStartAngle" format="integer"/>
         <attr name="centerMaxProgress" format="integer"/>
+        <attr name="centerEmptyProgressColor" format="color"/>
+
 
         <!--inner view-->
         <attr name="innerProgress" format="integer"/>
         <attr name="innerProgressColor" format="color"/>
         <attr name="innerProgressStartAngle" format="integer"/>
         <attr name="innerMaxProgress" format="integer"/>
+        <attr name="innerEmptyProgressColor" format="color"/>
 
 
         <!-- Common Attrs-->
         <attr name="useRoundedCorner" format="boolean"/>
         <attr name="isAnimationOn" format="boolean"/>
         <attr name="hasElevation" format="boolean"/>
+        <attr name="hasEmptyProgressBar" format="boolean"/>
     </declare-styleable>
 </resources>
