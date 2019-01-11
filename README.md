@@ -87,3 +87,10 @@ thats it and how you can use the RadialProgressView in your project.
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
 
 > **angle = 0/90/180/270
+
+## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
+
+[Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
+
+Contributor : [Himanshu Singh](www.github.com/hi-manshu)
+
