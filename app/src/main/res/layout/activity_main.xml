@@ -19,6 +19,7 @@
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
+            app:outerProgress="50"
     />
 
 </RelativeLayout>

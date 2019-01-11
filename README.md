@@ -1,4 +1,4 @@
-![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/logo.png)
+![alt text](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/logo.jpg)
 
 # Radial Progress Bar
 
