@@ -28,11 +28,12 @@ dependencies {
 ```
 
 Step3. To use this in XML File, use
+
 ```
   <com.mindorks.RadialProgressBar
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/progress"
+            android:id="@+id/progress_view"
             app:useRoundedCorner="true"
             app:innerMaxProgress="100"
             app:outerMaxProgress="100"
@@ -40,9 +41,18 @@ Step3. To use this in XML File, use
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
-    />
+   />
 
 ```
 
+Step 4. Link the XML in Activity File using,
 
+```
+val progress_view = findViewById(R.id.progress_view)
 
+or
+
+RadialProgressBar radialProgressBar = findViewById(R.id.progress_view) //if using Java
+```
+
+thats it and ow you can use the RadialProgressView in your project.
