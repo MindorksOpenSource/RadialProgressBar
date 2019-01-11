@@ -61,9 +61,9 @@ thats it and how you can use the RadialProgressView in your project.
 
 | Feature                                   | XML                              | Activity (Java/Koltin)        |Default|
 | :-------------                         |:-------------                           | :-----            |:----
-|Set Start Angle OuterView|app:outerProgressStartAngle="0/90/180/270"|rpb.setStartAngleOuterView(0/90/180/270)|270|
-|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|rpb.setStartAngleCenterView(0/90/180/270)|270|
-|Set Start Angle InnerView|app:innerProgressStartAngle="0/90/180/270"|rpb.setStartAngleInnerView(0/90/180/270)|270|
+|Set Start Angle OuterView|app:outerProgressStartAngle="angle"|rpb.setStartAngleOuterView(angle)|270|
+|Set Start Angle CenterView|app:centerProgressStartAngle="angle"|rpb.setStartAngleCenterView(angle)|270|
+|Set Start Angle InnerView|app:innerProgressStartAngle="angle"|rpb.setStartAngleInnerView(angle)|270|
 |Set EmptyProgressColorOuterView|app:outerEmptyProgressColor="color"|rpb.setEmptyProgressColorOuterView(color)|#F5F5F5|
 |Set EmptyProgressColorCenterView|app:centerEmptyProgressColor="color"|rpb.setEmptyProgressColorCenterView(color)|#F5F5F5|
 |Set EmptyProgressColorInnerView|app:innerEmptyProgressColor="color"|rpb.setEmptyProgressColorInnerView(color)|#F5F5F5|
@@ -82,3 +82,5 @@ thats it and how you can use the RadialProgressView in your project.
 |Set RoundedCorner|app:useRoundedCorners="true/false"|rpb.useRoundedCorners(true/false)|true|
 |Set ProgressValues|----|rpb.setProgressValues(int,int,int)|----|
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
+
+> **angle = 0/90/180/270
