@@ -52,7 +52,7 @@ val radialProgressBar = findViewById(R.id.progress_view)
 
 or
 
-RadialProgressBar radialProgressBar = findViewById(R.id.progress_view) //if using Java
+RadialProgressBar rpb = findViewById(R.id.progress_view) //if using Java
 ```
 
 thats it and how you can use the RadialProgressView in your project.
@@ -61,6 +61,6 @@ thats it and how you can use the RadialProgressView in your project.
 
 | Feature                                   | XML                              | Activity (Java/Koltin)        |Default Value|
 | :-------------                         |:-------------                           | :-----            |:----
-|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleCenterView(0/90/180/270)|270|
-|Set Start Angle OuterView|app:outerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleOuterView(0/90/180/270)|270|
-|Set Start Angle InnerView|app:innerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleInnerView(0/90/180/270)|270|
+|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|rpb.setStartAngleCenterView(0/90/180/270)|270|
+|Set Start Angle OuterView|app:outerProgressStartAngle="0/90/180/270"|rpb.setStartAngleOuterView(0/90/180/270)|270|
+|Set Start Angle InnerView|app:innerProgressStartAngle="0/90/180/270"|rpb.setStartAngleInnerView(0/90/180/270)|270|
