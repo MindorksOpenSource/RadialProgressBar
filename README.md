@@ -9,7 +9,7 @@ Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
 
 ## Getting Started
 
-Step 1. Add the JitPack repository to your Add it in your root `build.gradle` at the end of repositories:
+##### Step 1. Add the JitPack repository to your Add it in your root `build.gradle` at the end of repositories:
 
 
 ```
@@ -20,14 +20,14 @@ allprojects {
 }
 ```
 
-Step 2. Add the dependency
+##### Step 2. Add the dependency
 ```
 dependencies {
 	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.0'
 	}
 ```
 
-Step3. To use this in XML File, use
+##### Step3. To use this in XML File, use
 
 ```
   <com.mindorks.RadialProgressBar
@@ -45,14 +45,22 @@ Step3. To use this in XML File, use
 
 ```
 
-Step 4. Link the XML in Activity File using,
+##### Step 4. Link the XML in Activity File using,
 
 ```
-val progress_view = findViewById(R.id.progress_view)
+val radialProgressBar = findViewById(R.id.progress_view)
 
 or
 
 RadialProgressBar radialProgressBar = findViewById(R.id.progress_view) //if using Java
 ```
 
-thats it and ow you can use the RadialProgressView in your project.
+thats it and how you can use the RadialProgressView in your project.
+
+#### To Customise it according to your need you can use,
+
+| Feature                                   | XML                              | Activity (Java/Koltin)        |Default Value|
+| :-------------                         |:-------------                           | :-----            |:----
+|Set Start Angle CenterView|app:centerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleCenterView(0/90/180/270)|270|
+|Set Start Angle OuterView|app:outerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleOuterView(0/90/180/270)|270|
+|Set Start Angle InnerView|app:innerProgressStartAngle="0/90/180/270"|radialProgressBar.setStartAngleInnerView(0/90/180/270)|270|
