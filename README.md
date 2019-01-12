@@ -4,9 +4,8 @@
 
 Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
 ### Preview of Radial Progress Bar
-<img  height="200" src="https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/1.jpg">
 
-![](https://github.com/MindorksOpenSource/RadialProgressBar/blob/v2/images/rpb.gif)
+![](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/rpb.gif)
 
 
 [![Mindorks](https://img.shields.io/badge/mindorks-opensource-blue.svg)](https://mindorks.com/open-source-projects)
