@@ -88,6 +88,21 @@ thats it and how you can use the RadialProgressView in your project.
 
 > **angle = 0/90/180/270
 
+You can also get value related to the RadialProgressView,
+
+
+| Feature                                   | Value                              |
+| :-------------                         |:-------------                           |
+|Get Outer Progress|rpb.getOuterProgress()|
+|Get Inner Progress|rpb.getInnerProgress()|
+|Get Center Progress|rpb.getCenterProgress()|
+|Get Start Angle OuterProgress|rpb.getStartAngleOuterView()|
+|Get Start Angle InnerProgress|rpb.getStartAngleInnerView()|
+|Get Start Angle CenterProgress|rpb.getStartAngleCenterView()|
+|Get Start Angle OuterProgress|rpb.getMaxProgressOuterView()|
+|Get Start Angle InnerProgress|rpb.getMaxProgressInnerView()|
+|Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
+
 ## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
