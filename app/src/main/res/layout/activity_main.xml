@@ -16,10 +16,9 @@
             app:outerMaxProgress="100"
             app:centerMaxProgress="100"
             app:hasEmptyProgressBar="false"
+            android:layout_centerInParent="true"
             app:isAnimationOn="true"
-            app:innerProgress="50"
-            app:centerProgress="50"
-            app:outerProgress="50"
+
     />
 
 </RelativeLayout>
