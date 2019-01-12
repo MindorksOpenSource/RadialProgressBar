@@ -92,5 +92,5 @@ thats it and how you can use the RadialProgressView in your project.
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
-Contributor : [Himanshu Singh](www.github.com/hi-manshu)
+Contributor : [Himanshu Singh](https://github.com/hi-manshu)
 
