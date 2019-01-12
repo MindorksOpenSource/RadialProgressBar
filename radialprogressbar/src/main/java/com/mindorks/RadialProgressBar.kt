@@ -99,8 +99,8 @@ class RadialProgressBar : View {
     /**
      * @parseAttributes parses all XML Styleables and sets them to the functions
      */
-    private fun parseAttributes(a: TypedArray?) {
-        mOuterProgress = a!!.getInteger(R.styleable.RadialProgressBar_outerProgress, mOuterProgress)
+    private fun parseAttributes(a: TypedArray) {
+        mOuterProgress = a.getInteger(R.styleable.RadialProgressBar_outerProgress, mOuterProgress)
         mProgressColorOuterView = a.getColor(R.styleable.RadialProgressBar_outerProgressColor, mProgressColorOuterView)
         mInnerProgress = a.getInteger(R.styleable.RadialProgressBar_innerProgress, mInnerProgress)
         mProgressColorInnerView = a.getColor(R.styleable.RadialProgressBar_innerProgressColor, mProgressColorInnerView)
@@ -170,7 +170,7 @@ class RadialProgressBar : View {
         }
         if (mEmptyProgressBar) drawProgressBackArc(mEmptyProgressColorInnerView, oval, stroke, canvas)
 
-        canvas!!.drawArc(
+        canvas?.drawArc(
             oval, mStartAngleInnerView.toFloat(), mSweepAngleInnerView.toFloat(), false, mPaintInnerView
         )
 
@@ -198,7 +198,7 @@ class RadialProgressBar : View {
             )
         }
         if (mEmptyProgressBar) drawProgressBackArc(mEmptyProgressColorCenterView, oval, stroke, canvas)
-        canvas!!.drawArc(
+        canvas?.drawArc(
             oval, mStartAngleCenterView.toFloat(), mSweepAngleCenterView.toFloat(), false, mPaintCenterView
         )
 
@@ -224,7 +224,7 @@ class RadialProgressBar : View {
             )
         }
         if (mEmptyProgressBar) drawProgressBackArc(mEmptyProgressColorOuterView, oval, stroke, canvas)
-        canvas!!.drawArc(
+        canvas?.drawArc(
             oval, mStartAngleOuterView.toFloat(), mSweepAngleOuterView.toFloat(), false, mPaintOuterView
         )
 
@@ -244,7 +244,7 @@ class RadialProgressBar : View {
         backgroundPaint.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
         backgroundPaint.style = Paint.Style.STROKE
         backgroundPaint.color = color
-        canvas!!.drawArc(oval, 0.toFloat(), mMaxSweepAngle, false, backgroundPaint)
+        canvas?.drawArc(oval, 0.toFloat(), mMaxSweepAngle, false, backgroundPaint)
     }
 
     /**
@@ -386,6 +386,7 @@ class RadialProgressBar : View {
         mStartAngleInnerView = angle
         invalidate()
     }
+
     /**
     Set the  Maximum Progress of Outer Progress View
      */
@@ -393,6 +394,7 @@ class RadialProgressBar : View {
         mMaxProgressOuterView = max
         invalidate()
     }
+
     /**
     Set the  Maximum Progress of Inner Progress View
      */
@@ -400,6 +402,7 @@ class RadialProgressBar : View {
         mMaxProgressInnerView = max
         invalidate()
     }
+
     /**
     Set the  Maximum Progress of Center Progress View
      */
@@ -407,13 +410,14 @@ class RadialProgressBar : View {
         mMaxProgressCenterView = max
         invalidate()
     }
+
     /**
     Set the   Progress of Outer Progress View
      */
     fun setOuterProgress(progress: Int) {
         if (progress != 0) mOuterProgress = progress
-        val animator =
-            ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
+        val animator = ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
+        animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationOuterView.toLong()
         animator.addUpdateListener { valueAnimator ->
@@ -497,6 +501,7 @@ class RadialProgressBar : View {
         if (progress != 0) mInnerProgress = progress
         val animator =
             ValueAnimator.ofFloat(mSweepAngleInnerView.toFloat(), calcSweepAngleFromInnerProgress(mInnerProgress))
+        animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationInnerView.toLong()
         animator.addUpdateListener { valueAnimator ->
@@ -521,8 +526,8 @@ class RadialProgressBar : View {
      */
     fun setCenterProgress(progress: Int) {
         if (progress != 0) mCenterProgress = progress
-        val animator =
-            ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
+        val animator = ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
+        animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationCenterView.toLong()
         animator.addUpdateListener { valueAnimator ->
