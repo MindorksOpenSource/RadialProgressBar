@@ -105,6 +105,11 @@ You can also get value related to the RadialProgressView,
 |Get Start Angle InnerProgress|rpb.getMaxProgressInnerView()|
 |Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
 
+### Todo
+    - Can Keep two or only one progress bars
+    - If using One progressbar, user can also have an option to display the value in text
+    
+
 ## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
