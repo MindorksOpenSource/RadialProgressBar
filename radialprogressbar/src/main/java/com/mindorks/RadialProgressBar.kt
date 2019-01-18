@@ -45,6 +45,8 @@ class RadialProgressBar : View {
     private var mElevation = false
     private var mEmptyProgressBar = false
     private var backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var hasOneProgressView = false
+    private var hasTwoProgressView = false
 
     /**
      * Data of the Outer View
@@ -90,9 +92,20 @@ class RadialProgressBar : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         initMeasurements()
-        drawInnerProgressView(canvas)
-        drawCenterProgressView(canvas)
-        drawOuterProgressView(canvas)
+        if (hasOneProgressView) {
+            drawOuterProgressView(canvas)
+        }
+        if (hasTwoProgressView && !hasOneProgressView) {
+            drawOuterProgressView(canvas)
+            drawCenterProgressView(canvas)
+        } else if (hasTwoProgressView && hasOneProgressView) {
+            drawCenterProgressView(canvas)
+        }
+        if (!hasOneProgressView && !hasTwoProgressView) {
+            drawInnerProgressView(canvas)
+            drawCenterProgressView(canvas)
+            drawOuterProgressView(canvas)
+        }
     }
 
 
@@ -107,6 +120,8 @@ class RadialProgressBar : View {
         mCenterProgress = a.getInteger(R.styleable.RadialProgressBar_centerProgress, mCenterProgress)
         mProgressColorCenterView =
                 a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
+        hasOneProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasOneProgressView, hasOneProgressView)
+        hasTwoProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasTwoProgressView, hasTwoProgressView)
         mRoundedCorners = a.getBoolean(R.styleable.RadialProgressBar_useRoundedCorner, mRoundedCorners)
         isAnimationOn = a.getBoolean(R.styleable.RadialProgressBar_isAnimationOn, isAnimationOn)
         mStartAngleOuterView = a.getInteger(R.styleable.RadialProgressBar_outerProgressStartAngle, mStartAngleOuterView)
@@ -144,7 +159,8 @@ class RadialProgressBar : View {
         setStartAngleCenterView(mStartAngleCenterView)
         setStartAngleInnerView(mStartAngleInnerView)
         setStartAngleOuterView(mStartAngleOuterView)
-
+        setHasOneProgressView(hasOneProgressView)
+        setHasTwoProgressView(hasTwoProgressView)
     }
 
     /**
@@ -416,7 +432,8 @@ class RadialProgressBar : View {
      */
     fun setOuterProgress(progress: Int) {
         if (progress != 0) mOuterProgress = progress
-        val animator = ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
+        val animator =
+            ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
         animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationOuterView.toLong()
@@ -526,7 +543,8 @@ class RadialProgressBar : View {
      */
     fun setCenterProgress(progress: Int) {
         if (progress != 0) mCenterProgress = progress
-        val animator = ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
+        val animator =
+            ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
         animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationCenterView.toLong()
@@ -547,4 +565,21 @@ class RadialProgressBar : View {
         invalidate()
 
     }
+
+    /**
+    set the condition to draw only outer progressview
+     */
+    private fun setHasOneProgressView(value: Boolean) {
+        hasOneProgressView = value
+        invalidate()
+    }
+
+    /**
+    set the condition to draw only outer and inner progressview
+     */
+    private fun setHasTwoProgressView(value: Boolean) {
+        hasTwoProgressView = value
+        invalidate()
+    }
+
 }
