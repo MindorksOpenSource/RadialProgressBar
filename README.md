@@ -5,7 +5,7 @@
 Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
 ### Preview of Radial Progress Bar
 
-![](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/rpb.gif)
+![](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/slow.gif)
 
 
 [![Mindorks](https://img.shields.io/badge/mindorks-opensource-blue.svg)](https://mindorks.com/open-source-projects)
@@ -46,6 +46,8 @@ dependencies {
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
+	    app:hasTwoProgressView="false"
+            app:hasOneProgressView="false"
    />
 
 ```
@@ -87,6 +89,8 @@ thats it and how you can use the RadialProgressView in your project.
 |Set RoundedCorner|app:useRoundedCorners="true/false"|rpb.useRoundedCorners(true/false)|true|
 |Set ProgressValues|----|rpb.setProgressValues(int,int,int)|----|
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
+|Set Only OuterProgress|app:hasOneProgressView="true/false"|rpb.setOneProgressView(true/false)|false|
+|Set Only Outer and CenterProgress|app:hasTwoProgressView="true/false"|rpb.setTwoProgressView(true/false)|false|
 
 > **angle = 0/90/180/270
 
@@ -104,6 +108,11 @@ You can also get value related to the RadialProgressView,
 |Get Start Angle OuterProgress|rpb.getMaxProgressOuterView()|
 |Get Start Angle InnerProgress|rpb.getMaxProgressInnerView()|
 |Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
+
+### Todo
+    - Can Keep two or only one progress bars
+    - If using One progressbar, user can also have an option to display the value in text
+    
 
 ## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
 
