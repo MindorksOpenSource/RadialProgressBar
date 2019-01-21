@@ -110,7 +110,6 @@ You can also get value related to the RadialProgressView,
 |Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
 
 ### Todo
-    - Can Keep two or only one progress bars
     - If using One progressbar, user can also have an option to display the value in text
     
 
