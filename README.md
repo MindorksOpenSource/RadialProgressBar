@@ -46,6 +46,8 @@ dependencies {
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
+	    app:hasTwoProgressView="false"
+            app:hasOneProgressView="false"
    />
 
 ```
@@ -87,6 +89,8 @@ thats it and how you can use the RadialProgressView in your project.
 |Set RoundedCorner|app:useRoundedCorners="true/false"|rpb.useRoundedCorners(true/false)|true|
 |Set ProgressValues|----|rpb.setProgressValues(int,int,int)|----|
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
+|Set Only OuterProgress|app:hasOneProgressView="true/false"|rpb.setOneProgressView(true/false)|false|
+|Set Only Outer and CenterProgress|app:hasTwoProgressView="true/false"|rpb.setTwoProgressView(true/false)|false|
 
 > **angle = 0/90/180/270
 

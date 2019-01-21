@@ -45,6 +45,8 @@ class RadialProgressBar : View {
     private var mElevation = false
     private var mEmptyProgressBar = false
     private var backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var hasOneProgressView = false
+    private var hasTwoProgressView = false
 
     /**
      * Data of the Outer View
@@ -90,9 +92,20 @@ class RadialProgressBar : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         initMeasurements()
-        drawInnerProgressView(canvas)
-        drawCenterProgressView(canvas)
-        drawOuterProgressView(canvas)
+        when {
+            hasTwoProgressView -> {
+                drawOuterProgressView(canvas)
+                drawCenterProgressView(canvas)
+            }
+            hasOneProgressView -> {
+                drawOuterProgressView(canvas)
+            }
+            !hasOneProgressView && !hasTwoProgressView -> {
+                drawInnerProgressView(canvas)
+                drawCenterProgressView(canvas)
+                drawOuterProgressView(canvas)
+            }
+        }
     }
 
 
@@ -107,6 +120,8 @@ class RadialProgressBar : View {
         mCenterProgress = a.getInteger(R.styleable.RadialProgressBar_centerProgress, mCenterProgress)
         mProgressColorCenterView =
                 a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
+        hasOneProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasOneProgressView, hasOneProgressView)
+        hasTwoProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasTwoProgressView, hasTwoProgressView)
         mRoundedCorners = a.getBoolean(R.styleable.RadialProgressBar_useRoundedCorner, mRoundedCorners)
         isAnimationOn = a.getBoolean(R.styleable.RadialProgressBar_isAnimationOn, isAnimationOn)
         mStartAngleOuterView = a.getInteger(R.styleable.RadialProgressBar_outerProgressStartAngle, mStartAngleOuterView)
@@ -144,7 +159,8 @@ class RadialProgressBar : View {
         setStartAngleCenterView(mStartAngleCenterView)
         setStartAngleInnerView(mStartAngleInnerView)
         setStartAngleOuterView(mStartAngleOuterView)
-
+        setOneProgressView(hasOneProgressView)
+        setTwoProgressView(hasTwoProgressView)
     }
 
     /**
@@ -266,14 +282,20 @@ class RadialProgressBar : View {
      * @return Sweep Angle for Inner ProgressView
      * */
     private fun calcSweepAngleFromInnerProgress(progress: Int): Float {
-        return (mMaxSweepAngle / mMaxProgressInnerView * progress)
+        return when {
+            !(hasOneProgressView && hasTwoProgressView) -> (mMaxSweepAngle / mMaxProgressInnerView * progress)
+            else -> 0F
+        }
     }
 
     /**
      * @return Sweep Angle for Center ProgressView
      * */
     private fun calcSweepAngleFromCenterProgress(progress: Int): Float {
-        return (mMaxSweepAngle / mMaxProgressCenterView * progress)
+        return when {
+            !(hasOneProgressView && !hasTwoProgressView) -> (mMaxSweepAngle / mMaxProgressCenterView * progress)
+            else -> 0F
+        }
     }
 
     /**
@@ -287,14 +309,21 @@ class RadialProgressBar : View {
      * @return inner progress value
      * */
     fun getInnerProgress(): Int {
-        return this.mInnerProgress
+        return when {
+            !(hasOneProgressView && hasTwoProgressView) -> this.mInnerProgress
+            else -> 0
+        }
     }
 
     /*
       * @return center progress value
       * */
     fun getCenterProgress(): Int {
-        return this.mCenterProgress
+        return when {
+            !(hasOneProgressView && !hasTwoProgressView) -> this.mCenterProgress
+            else -> 0
+        }
+
     }
 
     /**
@@ -308,21 +337,30 @@ class RadialProgressBar : View {
      * @return start angle Inner progressview
      * */
     fun getStartAngleInnerView(): Int {
-        return this.mStartAngleInnerView
+        return when {
+            !(hasOneProgressView && hasTwoProgressView) -> this.mStartAngleInnerView
+            else -> 0
+        }
     }
 
     /**
      * @return start angle center progressview
      * */
     fun getStartAngleCenterView(): Int {
-        return this.mStartAngleCenterView
+        return when {
+            !(hasOneProgressView && !hasTwoProgressView) -> this.mStartAngleCenterView
+            else -> 0
+        }
     }
 
     /**
     @return max progress value of inner progress view
      */
     fun getMaxProgressInnerView(): Int {
-        return this.mMaxProgressInnerView
+        return when {
+            !(hasOneProgressView && hasTwoProgressView) -> this.mMaxProgressInnerView
+            else -> 0
+        }
     }
 
     /**
@@ -336,31 +374,40 @@ class RadialProgressBar : View {
     @return max progress value of center progress view
      */
     fun getMaxProgressCenterView(): Int {
-        return this.mMaxProgressCenterView
+        return when {
+            !(hasOneProgressView && !hasTwoProgressView) -> this.mMaxProgressCenterView
+            else -> 0
+        }
     }
 
     /**
     Set the Start Angle for Center Progress View
      */
     fun setStartAngleCenterView(angle: Int) {
-        mStartAngleCenterView = angle
-        invalidate()
+        if (!(hasOneProgressView && !hasTwoProgressView)) {
+            mStartAngleCenterView = angle
+            invalidate()
+        }
     }
 
     /**
     Set the  Color for Empty Center Progress View
      */
     fun setEmptyProgressColorCenterView(value: Int) {
-        mEmptyProgressColorCenterView = value
-        invalidate()
+        if (!(hasOneProgressView && !hasTwoProgressView)) {
+            mEmptyProgressColorCenterView = value
+            invalidate()
+        }
     }
 
     /**
     Set the  Color for Empty Inner Progress View
      */
     fun setEmptyProgressColorInnerView(value: Int) {
-        mEmptyProgressColorInnerView = value
-        invalidate()
+        if (!(hasOneProgressView && hasTwoProgressView)) {
+            mEmptyProgressColorInnerView = value
+            invalidate()
+        }
     }
 
     /**
@@ -383,8 +430,10 @@ class RadialProgressBar : View {
     Set the Start Angle for Inner Progress View
      */
     fun setStartAngleInnerView(angle: Int) {
-        mStartAngleInnerView = angle
-        invalidate()
+        if (!(hasOneProgressView && hasTwoProgressView)) {
+            mStartAngleInnerView = angle
+            invalidate()
+        }
     }
 
     /**
@@ -399,16 +448,20 @@ class RadialProgressBar : View {
     Set the  Maximum Progress of Inner Progress View
      */
     fun setMaxProgressInnerView(max: Int) {
-        mMaxProgressInnerView = max
-        invalidate()
+        if (!(hasOneProgressView && hasTwoProgressView)) {
+            mMaxProgressInnerView = max
+            invalidate()
+        }
     }
 
     /**
     Set the  Maximum Progress of Center Progress View
      */
     fun setMaxProgressCenterView(max: Int) {
-        mMaxProgressCenterView = max
-        invalidate()
+        if (!(hasOneProgressView && !hasTwoProgressView)) {
+            mMaxProgressCenterView = max
+            invalidate()
+        }
     }
 
     /**
@@ -416,7 +469,8 @@ class RadialProgressBar : View {
      */
     fun setOuterProgress(progress: Int) {
         if (progress != 0) mOuterProgress = progress
-        val animator = ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
+        val animator =
+            ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
         animator.removeAllUpdateListeners()
         animator.interpolator = DecelerateInterpolator()
         animator.duration = mAnimationDurationOuterView.toLong()
@@ -477,20 +531,41 @@ class RadialProgressBar : View {
     set the  progress for all progressview
      */
     fun setProgressValues(innerProgress: Int, centerProgress: Int, outerProgress: Int) {
-        setInnerProgress(innerProgress)
-        setCenterProgress(centerProgress)
-        setOuterProgress(outerProgress)
+        when {
+            hasTwoProgressView -> {
+                setCenterProgress(centerProgress)
+                setOuterProgress(outerProgress)
+            }
+            hasOneProgressView -> {
+                setOuterProgress(outerProgress)
+            }
+            !hasOneProgressView && !hasTwoProgressView -> {
+                setInnerProgress(innerProgress)
+                setCenterProgress(centerProgress)
+                setOuterProgress(outerProgress)
+            }
+        }
         invalidate()
-
     }
 
     /**
     set the max progress  for all progressview
      */
     fun setMaxProgressValues(innerProgress: Int, centerProgress: Int, outerProgress: Int) {
-        setMaxProgressInnerView(innerProgress)
-        setMaxProgressCenterView(centerProgress)
-        setMaxProgressOuterView(outerProgress)
+        when {
+            hasTwoProgressView -> {
+                setMaxProgressCenterView(centerProgress)
+                setMaxProgressOuterView(outerProgress)
+            }
+            hasOneProgressView -> {
+                setMaxProgressOuterView(outerProgress)
+            }
+            !hasOneProgressView && !hasTwoProgressView -> {
+                setMaxProgressInnerView(innerProgress)
+                setMaxProgressCenterView(centerProgress)
+                setMaxProgressOuterView(outerProgress)
+            }
+        }
         invalidate()
     }
 
@@ -498,53 +573,80 @@ class RadialProgressBar : View {
     set the progress  for inner progressview
      */
     fun setInnerProgress(progress: Int) {
-        if (progress != 0) mInnerProgress = progress
-        val animator =
-            ValueAnimator.ofFloat(mSweepAngleInnerView.toFloat(), calcSweepAngleFromInnerProgress(mInnerProgress))
-        animator.removeAllUpdateListeners()
-        animator.interpolator = DecelerateInterpolator()
-        animator.duration = mAnimationDurationInnerView.toLong()
-        animator.addUpdateListener { valueAnimator ->
-            val value: Float = valueAnimator.animatedValue as Float
-            mSweepAngleInnerView = (value.toInt())
-            invalidate()
+        if (!(hasOneProgressView && hasTwoProgressView)) {
+            if (progress != 0) mInnerProgress = progress
+            val animator =
+                ValueAnimator.ofFloat(mSweepAngleInnerView.toFloat(), calcSweepAngleFromInnerProgress(mInnerProgress))
+            animator.removeAllUpdateListeners()
+            animator.interpolator = DecelerateInterpolator()
+            animator.duration = mAnimationDurationInnerView.toLong()
+            animator.addUpdateListener { valueAnimator ->
+                val value: Float = valueAnimator.animatedValue as Float
+                mSweepAngleInnerView = (value.toInt())
+                invalidate()
 
+            }
+            animator.start()
         }
-        animator.start()
     }
 
     /**
     set the progress color for center progressview
      */
     fun setInnerProgressColor(color: Int) {
-        mProgressColorInnerView = color
-        invalidate()
+        if (!(hasOneProgressView && hasTwoProgressView)) {
+            mProgressColorInnerView = color
+            invalidate()
+        }
     }
 
     /**
     set the progress for center progressview
      */
     fun setCenterProgress(progress: Int) {
-        if (progress != 0) mCenterProgress = progress
-        val animator = ValueAnimator.ofFloat(mSweepAngleCenterView.toFloat(), calcSweepAngleFromCenterProgress(mCenterProgress))
-        animator.removeAllUpdateListeners()
-        animator.interpolator = DecelerateInterpolator()
-        animator.duration = mAnimationDurationCenterView.toLong()
-        animator.addUpdateListener { valueAnimator ->
-            val value: Float = valueAnimator.animatedValue as Float
-            mSweepAngleCenterView = (value.toInt())
-            invalidate()
-
+        if (!(hasOneProgressView && !hasTwoProgressView)) {
+            if (progress != 0) mCenterProgress = progress
+            val animator =
+                ValueAnimator.ofFloat(
+                    mSweepAngleCenterView.toFloat(),
+                    calcSweepAngleFromCenterProgress(mCenterProgress)
+                )
+            animator.removeAllUpdateListeners()
+            animator.interpolator = DecelerateInterpolator()
+            animator.duration = mAnimationDurationCenterView.toLong()
+            animator.addUpdateListener { valueAnimator ->
+                val value: Float = valueAnimator.animatedValue as Float
+                mSweepAngleCenterView = (value.toInt())
+                invalidate()
+            }
+            animator.start()
         }
-        animator.start()
     }
 
     /**
     set the color for center progressview
      */
     fun setCenterProgressColor(color: Int) {
-        mProgressColorCenterView = color
-        invalidate()
-
+        if (!(hasOneProgressView && !hasTwoProgressView)) {
+            mProgressColorCenterView = color
+            invalidate()
+        }
     }
+
+    /**
+    set the condition to draw only outer progressview
+     */
+    fun setOneProgressView(value: Boolean) {
+        hasOneProgressView = value
+        invalidate()
+    }
+
+    /**
+    set the condition to draw only outer and inner progressview
+     */
+    fun setTwoProgressView(value: Boolean) {
+        hasTwoProgressView = value
+        invalidate()
+    }
+
 }
