@@ -141,6 +141,8 @@ class RadialProgressBar : View {
                 a.getColor(R.styleable.RadialProgressBar_innerEmptyProgressColor, mEmptyProgressColorInnerView)
         a.recycle()
         hasElevation(mElevation)
+        hasOneProgressView(hasOneProgressView)
+        hasTwoProgressView(hasTwoProgressView)
         hasEmptyProgressBar(mEmptyProgressBar)
         setEmptyProgressColorCenterView(mEmptyProgressColorCenterView)
         setEmptyProgressColorOuterView(mEmptyProgressColorOuterView)
@@ -159,8 +161,7 @@ class RadialProgressBar : View {
         setStartAngleCenterView(mStartAngleCenterView)
         setStartAngleInnerView(mStartAngleInnerView)
         setStartAngleOuterView(mStartAngleOuterView)
-        setOneProgressView(hasOneProgressView)
-        setTwoProgressView(hasTwoProgressView)
+
     }
 
     /**
@@ -511,7 +512,7 @@ class RadialProgressBar : View {
     /**
     set the condition for setting the animation for progressview
      */
-    private fun setAnimationInProgressView(animationOn: Boolean) {
+    fun setAnimationInProgressView(animationOn: Boolean) {
         if (!animationOn) {
             mAnimationDurationOuterView = 0
             mAnimationDurationInnerView = 0
@@ -636,7 +637,7 @@ class RadialProgressBar : View {
     /**
     set the condition to draw only outer progressview
      */
-    fun setOneProgressView(value: Boolean) {
+    fun hasOneProgressView(value: Boolean) {
         hasOneProgressView = value
         invalidate()
     }
@@ -644,7 +645,7 @@ class RadialProgressBar : View {
     /**
     set the condition to draw only outer and inner progressview
      */
-    fun setTwoProgressView(value: Boolean) {
+    fun hasTwoProgressView(value: Boolean) {
         hasTwoProgressView = value
         invalidate()
     }

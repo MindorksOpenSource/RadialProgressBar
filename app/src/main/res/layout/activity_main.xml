@@ -19,7 +19,7 @@
             android:layout_centerInParent="true"
             app:isAnimationOn="true"
             app:hasTwoProgressView="false"
-            app:hasOneProgressView="true"
+            app:hasOneProgressView="false"
     />
 
 </RelativeLayout>
