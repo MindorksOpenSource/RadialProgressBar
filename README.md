@@ -28,8 +28,7 @@ allprojects {
 ##### Step 2. Add the dependency
 ```
 dependencies {
-	     implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.1'
-
+	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.1'
 	}
 ```
 
@@ -47,7 +46,7 @@ dependencies {
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
-	        app:hasTwoProgressView="false"
+	    app:hasTwoProgressView="false"
             app:hasOneProgressView="false"
    />
 
