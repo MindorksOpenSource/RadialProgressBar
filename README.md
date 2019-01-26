@@ -117,5 +117,7 @@ You can also get value related to the RadialProgressView,
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
-Contributor : [Himanshu Singh](https://github.com/hi-manshu)
+Contributor :
+ [Himanshu Singh](https://github.com/hi-manshu)
+ [Akshay Nandwana](https://github.com/anandwana001)
 
