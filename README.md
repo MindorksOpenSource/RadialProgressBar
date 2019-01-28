@@ -28,7 +28,7 @@ allprojects {
 ##### Step 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.0'
+	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.1'
 	}
 ```
 
@@ -46,6 +46,8 @@ dependencies {
             app:isAnimationOn="true"
             app:innerProgress="50"
             app:centerProgress="50"
+	    app:hasTwoProgressView="false"
+            app:hasOneProgressView="false"
    />
 
 ```
@@ -87,6 +89,8 @@ thats it and how you can use the RadialProgressView in your project.
 |Set RoundedCorner|app:useRoundedCorners="true/false"|rpb.useRoundedCorners(true/false)|true|
 |Set ProgressValues|----|rpb.setProgressValues(int,int,int)|----|
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
+|Set Only OuterProgress|app:hasOneProgressView="true/false"|rpb.setOneProgressView(true/false)|false|
+|Set Only Outer and CenterProgress|app:hasTwoProgressView="true/false"|rpb.setTwoProgressView(true/false)|false|
 
 > **angle = 0/90/180/270
 
@@ -106,7 +110,6 @@ You can also get value related to the RadialProgressView,
 |Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
 
 ### Todo
-    - Can Keep two or only one progress bars
     - If using One progressbar, user can also have an option to display the value in text
     
 
@@ -114,5 +117,7 @@ You can also get value related to the RadialProgressView,
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
-Contributor : [Himanshu Singh](https://github.com/hi-manshu)
+Contributor :
+ [Himanshu Singh](https://github.com/hi-manshu)
+ [Akshay Nandwana](https://github.com/anandwana001)
 

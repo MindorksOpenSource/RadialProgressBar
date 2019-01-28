@@ -28,5 +28,7 @@
         <attr name="isAnimationOn" format="boolean"/>
         <attr name="hasElevation" format="boolean"/>
         <attr name="hasEmptyProgressBar" format="boolean"/>
+        <attr name="hasOneProgressView" format="boolean"/>
+        <attr name="hasTwoProgressView" format="boolean"/>
     </declare-styleable>
 </resources>
