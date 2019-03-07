@@ -180,8 +180,8 @@ class RadialProgressBar : View {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
         val stroke = (diameter / 8).toFloat()
-        val addVal = (stroke * 2) + 8f
-        val subVal = ((stroke * 2) + paddingView + 8f)
+        val addVal = (stroke * 2) + 20f
+        val subVal = ((stroke * 2) + paddingView + 20f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintInnerView.color = mProgressColorInnerView
         mPaintInnerView.strokeWidth = stroke
@@ -216,8 +216,8 @@ class RadialProgressBar : View {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
         val stroke = (diameter / 8).toFloat()
-        val addVal = stroke + 4f
-        val subVal = (stroke + paddingView + 4f)
+        val addVal = stroke + 10f
+        val subVal = (stroke + paddingView + 10f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintCenterView.color = mProgressColorCenterView
         mPaintCenterView.strokeWidth = stroke
