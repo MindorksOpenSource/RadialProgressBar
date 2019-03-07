@@ -10,6 +10,9 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.graphics.Shader
+import android.graphics.LinearGradient
+
 
 /**
  * @author Himanshu Singh
@@ -47,6 +50,7 @@ class RadialProgressBar : View {
     private var backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var hasOneProgressView = false
     private var hasTwoProgressView = false
+    private var hasGradientShade = true
 
     /**
      * Data of the Outer View
@@ -60,7 +64,8 @@ class RadialProgressBar : View {
     private var mProgressColorOuterView = Color.parseColor("#f52e67")
     private var mEmptyProgressColorOuterView = Color.parseColor("#F5F5F5")
     private var mPaintOuterView = Paint(Paint.ANTI_ALIAS_FLAG)
-
+    private var mTopColorOuterView = Color.parseColor("#fbab00")
+    private var mBottomColorOuterView = Color.parseColor("#f5004b")
     /**
      * Data of the Center View
      */
@@ -72,6 +77,8 @@ class RadialProgressBar : View {
     private var mProgressColorCenterView = Color.parseColor("#c2ff07")
     private var mPaintCenterView = Paint(Paint.ANTI_ALIAS_FLAG)
     private var mEmptyProgressColorCenterView = Color.parseColor("#F5F5F5")
+    private var mTopColorCenterView = Color.parseColor("#3affaa")
+    private var mBottomColorCenterView = Color.parseColor("#1b93ff")
 
 
     /**
@@ -85,6 +92,8 @@ class RadialProgressBar : View {
     private var mProgressColorInnerView = Color.parseColor("#0dffab")
     private var mPaintInnerView = Paint(Paint.ANTI_ALIAS_FLAG)
     private var mEmptyProgressColorInnerView = Color.parseColor("#F5F5F5")
+    private var mTopColorInnerView = Color.parseColor("#5eb3fc")
+    private var mBottomColorInnerView = Color.parseColor("#28007d")
 
     /**
      * @onDraw draws all the Layout on Screen
@@ -119,14 +128,14 @@ class RadialProgressBar : View {
         mProgressColorInnerView = a.getColor(R.styleable.RadialProgressBar_innerProgressColor, mProgressColorInnerView)
         mCenterProgress = a.getInteger(R.styleable.RadialProgressBar_centerProgress, mCenterProgress)
         mProgressColorCenterView =
-                a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
+            a.getColor(R.styleable.RadialProgressBar_centerProgressColor, mProgressColorCenterView)
         hasOneProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasOneProgressView, hasOneProgressView)
         hasTwoProgressView = a.getBoolean(R.styleable.RadialProgressBar_hasTwoProgressView, hasTwoProgressView)
         mRoundedCorners = a.getBoolean(R.styleable.RadialProgressBar_useRoundedCorner, mRoundedCorners)
         isAnimationOn = a.getBoolean(R.styleable.RadialProgressBar_isAnimationOn, isAnimationOn)
         mStartAngleOuterView = a.getInteger(R.styleable.RadialProgressBar_outerProgressStartAngle, mStartAngleOuterView)
         mStartAngleCenterView =
-                a.getInteger(R.styleable.RadialProgressBar_centerProgressStartAngle, mStartAngleCenterView)
+            a.getInteger(R.styleable.RadialProgressBar_centerProgressStartAngle, mStartAngleCenterView)
         mStartAngleInnerView = a.getInteger(R.styleable.RadialProgressBar_innerProgressStartAngle, mStartAngleInnerView)
         mMaxProgressOuterView = a.getInteger(R.styleable.RadialProgressBar_outerMaxProgress, mMaxProgressOuterView)
         mMaxProgressInnerView = a.getInteger(R.styleable.RadialProgressBar_innerMaxProgress, mMaxProgressInnerView)
@@ -134,11 +143,11 @@ class RadialProgressBar : View {
         mElevation = a.getBoolean(R.styleable.RadialProgressBar_hasElevation, mElevation)
         mEmptyProgressBar = a.getBoolean(R.styleable.RadialProgressBar_hasEmptyProgressBar, mEmptyProgressBar)
         mEmptyProgressColorCenterView =
-                a.getColor(R.styleable.RadialProgressBar_centerEmptyProgressColor, mEmptyProgressColorCenterView)
+            a.getColor(R.styleable.RadialProgressBar_centerEmptyProgressColor, mEmptyProgressColorCenterView)
         mEmptyProgressColorOuterView =
-                a.getColor(R.styleable.RadialProgressBar_outerEmptyProgressColor, mEmptyProgressColorOuterView)
+            a.getColor(R.styleable.RadialProgressBar_outerEmptyProgressColor, mEmptyProgressColorOuterView)
         mEmptyProgressColorInnerView =
-                a.getColor(R.styleable.RadialProgressBar_innerEmptyProgressColor, mEmptyProgressColorInnerView)
+            a.getColor(R.styleable.RadialProgressBar_innerEmptyProgressColor, mEmptyProgressColorInnerView)
         a.recycle()
         hasElevation(mElevation)
         hasOneProgressView(hasOneProgressView)
@@ -179,6 +188,13 @@ class RadialProgressBar : View {
         mPaintInnerView.isAntiAlias = true
         mPaintInnerView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
         mPaintInnerView.style = Paint.Style.STROKE
+        if (hasGradientShade) {
+            mPaintInnerView.shader = LinearGradient(
+                0f, 0f, 0f,
+                height.toFloat(), mTopColorInnerView,
+                mBottomColorInnerView, Shader.TileMode.MIRROR
+            )
+        }
         if (mElevation) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, mPaintInnerView)
             mPaintInnerView.setShadowLayer(
@@ -208,6 +224,14 @@ class RadialProgressBar : View {
         mPaintCenterView.isAntiAlias = true
         mPaintCenterView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
         mPaintCenterView.style = Paint.Style.STROKE
+        if (hasGradientShade) {
+            mPaintCenterView.shader = LinearGradient(
+                0f, 0f, 0f,
+                height.toFloat(), mTopColorCenterView,
+                mBottomColorCenterView, Shader.TileMode.MIRROR
+            )
+        }
+
         if (mElevation) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, mPaintCenterView)
             mPaintCenterView.setShadowLayer(
@@ -234,6 +258,12 @@ class RadialProgressBar : View {
         mPaintOuterView.isAntiAlias = true
         mPaintOuterView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
         mPaintOuterView.style = Paint.Style.STROKE
+        if (hasGradientShade) {
+            mPaintOuterView.shader = LinearGradient(
+                0f, 0f, 0f, height.toFloat(), mTopColorOuterView,
+                mBottomColorOuterView, Shader.TileMode.MIRROR
+            )
+        }
         if (mElevation) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, mPaintOuterView)
             mPaintOuterView.setShadowLayer(

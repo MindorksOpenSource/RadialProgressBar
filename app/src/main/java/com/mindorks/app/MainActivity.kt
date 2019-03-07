@@ -9,8 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        progress.setProgressValues(70, 90, 90)
-        progress.hasTwoProgressView(true)
+        progress.setProgressValues(100, 100, 100)
 
     }
 }
