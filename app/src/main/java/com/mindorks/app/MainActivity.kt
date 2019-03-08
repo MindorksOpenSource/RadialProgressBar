@@ -12,5 +12,6 @@ class MainActivity : AppCompatActivity() {
         progress.setProgressValues(70, 90, 90)
         progress.hasTwoProgressView(true)
 
+//        ahvajggj
     }
 }
