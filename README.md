@@ -80,9 +80,9 @@ thats it and how you can use the RadialProgressView in your project.
 |Set OuterProgress|app:outerProgress="Integer"|rpb.setOuterProgress(Integer)|0|
 |Set CenterProgress|app:centerProgress="Integer"|rpb.setCenterProgress(Integer)|0|
 |Set InnerProgress|app:innerProgress="Integer"|rpb.setInnerProgress(Integer)|0|
-|Set OuterProgressColor|app:outerProgressColor="color"|rpb.setOuterProgressColor(lisOfColor)|#f52e67|
-|Set CenterProgressColor|app:centerProgressColor="color"|rpb.setCenterProgressColor(lisOfColor)|#c2ff07|
-|Set InnerProgressColor|app:innerProgressColor="color"|rpb.setInnerProgressColor(lisOfColor)|#0dffab|
+|Set OuterProgressColor|app:outerProgressColor="color"|rpb.setOuterProgressColor(listOfColor)|#f52e67|
+|Set CenterProgressColor|app:centerProgressColor="color"|rpb.setCenterProgressColor(listOfColor)|#c2ff07|
+|Set InnerProgressColor|app:innerProgressColor="color"|rpb.setInnerProgressColor(listOfColor)|#0dffab|
 |Set Elevation|app:hasElevation="true/false"|rpb.hasElevation(true/false)|false|
 |Set EmptyProgressBar|app:hasEmptyProgressBar="true/false"|rpb.hasEmptyProgressBar(true/false)|false|
 |Set Animation|app:isAnimationOn="true/false"|rpb.setAnimationInProgressView(true/false)|true|
