@@ -5,7 +5,7 @@
 Radial ProgressBar inspired  by Apple Watch OS. It is highly Customisable <br/>
 ### Preview of Radial Progress Bar
 
-![](https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/slow.gif)
+ <img src="https://github.com/MindorksOpenSource/RadialProgressBar/blob/master/images/slow.gif" width ="200" height ="200"/>
 ![](https://images-na.ssl-images-amazon.com/images/I/51FRMHVcPcL._SX425_.jpg)
 
 
