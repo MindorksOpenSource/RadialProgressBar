@@ -129,8 +129,14 @@ For Gradient Shade,
 
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
+<<<<<<< HEAD
 Contributor :
  [Himanshu Singh](https://github.com/hi-manshu)
  
  [Akshay Nandwana](https://github.com/anandwana001)
+=======
+Contributor
+ * [Himanshu Singh](https://github.com/hi-manshu)
+ * [Akshay Nandwana](https://github.com/anandwana001)
+>>>>>>> 1a95ad741dfa2c35ab678af3a302640049babc40
 
