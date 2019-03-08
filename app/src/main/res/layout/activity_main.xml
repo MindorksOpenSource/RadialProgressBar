@@ -11,7 +11,6 @@
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:id="@+id/progress"
-            app:useRoundedCorner="true"
             app:innerMaxProgress="100"
             app:outerMaxProgress="100"
             app:centerMaxProgress="100"
