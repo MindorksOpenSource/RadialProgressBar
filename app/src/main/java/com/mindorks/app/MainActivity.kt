@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        progress.setProgressValues(90, 90, 90)
+        progress.setProgressValues(70, 90, 90)
         val outerColor = ArrayList<Int>()
         outerColor.add(Color.parseColor("#fbab00"))
         outerColor.add(Color.parseColor("#f5004b"))
