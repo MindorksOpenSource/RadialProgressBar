@@ -8,8 +8,8 @@
 
 
     <com.mindorks.RadialProgressBar
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:id="@+id/progress"
             app:useRoundedCorner="true"
             app:innerMaxProgress="100"
@@ -19,7 +19,6 @@
             android:layout_centerInParent="true"
             app:isAnimationOn="true"
             app:hasTwoProgressView="false"
-            app:hasOneProgressView="false"
-    />
+            app:hasOneProgressView="false"/>
 
 </RelativeLayout>
