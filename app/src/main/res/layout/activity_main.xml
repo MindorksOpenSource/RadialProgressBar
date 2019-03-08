@@ -5,7 +5,18 @@
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:background="#fff"
         tools:context=".MainActivity">
-
+    <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#407b4f"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:background="#ecf8ff"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/progress_stats"
+    />
 
     <com.mindorks.RadialProgressBar
             android:layout_width="200dp"
