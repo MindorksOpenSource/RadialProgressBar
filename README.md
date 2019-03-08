@@ -111,6 +111,16 @@ You can also get value related to the RadialProgressView,
 |Get Start Angle InnerProgress|rpb.getMaxProgressInnerView()|
 |Get Start Angle CenterProgress|rpb.getMaxProgressCenterView()|
 
+###
+For Gradient Shade,
+```
+ val outerColor = ArrayList<Int>()
+        outerColor.add(Color.parseColor("#fbab00"))
+        outerColor.add(Color.parseColor("#f5004b"))
+        progress.setOuterProgressColor(outerColor)
+        
+```
+
 ### Todo
     - If using One progressbar, user can also have an option to display the value in text
     
