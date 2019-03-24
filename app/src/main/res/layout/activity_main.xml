@@ -16,7 +16,7 @@
             android:background="#ecf8ff"
             android:layout_gravity="center_horizontal"
             android:text="@string/progress_stats"
-    />
+            android:layout_alignParentStart="true" android:layout_marginStart="135dp"/>
 
     <com.mindorks.RadialProgressBar
             android:layout_width="200dp"
