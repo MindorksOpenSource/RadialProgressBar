@@ -22,6 +22,12 @@
         <attr name="innerMaxProgress" format="integer"/>
         <attr name="innerEmptyProgressColor" format="color"/>
 
+        <!--Clickable-->
+        <attr name="isViewClickable" format="boolean"/>
+        <attr name="isInnerClickable" format="boolean"/>
+        <attr name="isCenterClickable" format="boolean"/>
+        <attr name="isOuterClickable" format="boolean"/>
+
 
         <!-- Common Attrs-->
         <attr name="useRoundedCorner" format="boolean"/>

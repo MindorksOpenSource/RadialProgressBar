@@ -1,6 +1,7 @@
 package com.mindorks
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
@@ -13,6 +14,7 @@ import android.view.animation.DecelerateInterpolator
 import android.graphics.Shader
 import android.graphics.LinearGradient
 import android.util.Log
+import android.view.MotionEvent
 import kotlin.collections.ArrayList
 
 
@@ -42,6 +44,14 @@ class RadialProgressBar : View {
 
 
     /**
+     *  Clickable
+     */
+    private var isViewClickable = false
+    private var isInnerClickable = true
+    private var isCenterClickable = true
+    private var isOuterClickable = true
+
+    /**
      * Common vars
      */
     private var isAnimationOn = true
@@ -56,7 +66,7 @@ class RadialProgressBar : View {
     /**
      * Data of the Outer View
      */
-
+    private var mOuterDiameter = 0f
     private var mStartAngleOuterView = 270
     private var mOuterProgress = 0
     private var mSweepAngleOuterView = 0
@@ -66,9 +76,11 @@ class RadialProgressBar : View {
     private var mEmptyProgressColorOuterView = Color.parseColor("#F5F5F5")
     private var mPaintOuterView = Paint(Paint.ANTI_ALIAS_FLAG)
     private var mOuterColor = ArrayList<Int>()
+
     /**
      * Data of the Center View
      */
+    private var mCenterDiameter = 0f
     private var mStartAngleCenterView = 270
     private var mSweepAngleCenterView = 0
     private var mAnimationDurationCenterView = 400
@@ -80,9 +92,11 @@ class RadialProgressBar : View {
     private var mCenterColor = ArrayList<Int>()
 
 
+
     /**
      * Data of the Inner View
      */
+    private var mInnerDiameter = 0f
     private var mStartAngleInnerView = 270
     private var mSweepAngleInnerView = 0
     private var mInnerProgress = 0
@@ -116,10 +130,73 @@ class RadialProgressBar : View {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        if(!isViewClickable) return false
+        val touchX = event!!.x
+        val touchY = event.y
+
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                // get touch angle from view center
+                val touchAngle = calTouchAngle(touchX,touchY)
+
+                // calculate touch distance form center
+                val dX2 = Math.pow((mViewWidth/2).toDouble() - touchX, 2.0).toFloat()
+                val dY2 = Math.pow((mViewHeight/2).toDouble() - touchY, 2.0).toFloat()
+                val distToCenter = Math.sqrt((dX2 + dY2).toDouble()).toFloat()
+
+                // No need to check for display only two or one as condition will not satisfy
+                when{
+                    // if touched on outer circle
+                    distToCenter > mOuterDiameter/2 - mPaintOuterView.strokeWidth/2
+                            && distToCenter < mOuterDiameter/2 + mPaintOuterView.strokeWidth/2
+                            && isOuterClickable ->{
+                        setOuterProgress(calcProgressFromOuterSweepAngle(touchAngle))
+                    }
+                    // if touched on outer inner circle
+                    distToCenter > mInnerDiameter/2 - mPaintInnerView.strokeWidth/2
+                            && distToCenter < mInnerDiameter/2 + mPaintInnerView.strokeWidth/2
+                            && isInnerClickable ->{
+                        setInnerProgress(calcProgressFromInnerSweepAngle(touchAngle))
+                    }
+                    // if touched on center circle
+                    distToCenter > mCenterDiameter/2 - mPaintCenterView.strokeWidth/2
+                            && distToCenter < mCenterDiameter/2 + mPaintCenterView.strokeWidth/2
+                            && isCenterClickable->{
+                        setCenterProgress(calcProgressFromCenterSweepAngle(touchAngle))
+                    }
+                }
+            }
+        }
+        return true
+
+    }
+
+
+    /**
+     * Compute a touch angle in degrees from center
+     * North (0 - 360)
+     * @param touchX : X position of the finger in this view
+     * @param touchY : Y position of the finger in this view
+     * @return angle float
+     */
+    private fun calTouchAngle(touchX: Float, touchY: Float): Float {
+        val dX = touchX - mViewWidth/2f
+        val dY = mViewHeight/2f - touchY
+        return (450-Math.toDegrees(Math.atan2(dY.toDouble(), dX.toDouble()))).toFloat() % 360
+    }
+
+
     /**
      * @parseAttributes parses all XML Styleables and sets them to the functions
      */
     private fun parseAttributes(a: TypedArray) {
+        isViewClickable = a.getBoolean(R.styleable.RadialProgressBar_isViewClickable, isViewClickable)
+        isInnerClickable = a.getBoolean(R.styleable.RadialProgressBar_isInnerClickable, isInnerClickable)
+        isCenterClickable = a.getBoolean(R.styleable.RadialProgressBar_isCenterClickable, isCenterClickable)
+        isOuterClickable = a.getBoolean(R.styleable.RadialProgressBar_isOuterClickable, isOuterClickable)
         mOuterProgress = a.getInteger(R.styleable.RadialProgressBar_outerProgress, mOuterProgress)
         mProgressColorOuterView = a.getColor(R.styleable.RadialProgressBar_outerProgressColor, mProgressColorOuterView)
         mInnerProgress = a.getInteger(R.styleable.RadialProgressBar_innerProgress, mInnerProgress)
@@ -184,6 +261,7 @@ class RadialProgressBar : View {
         val addVal = (stroke * 2) + 20f
         val subVal = ((stroke * 2) + paddingView + 20f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
+        mInnerDiameter = diameter - 2*subVal
         mPaintInnerView.strokeWidth = stroke
         mPaintInnerView.isAntiAlias = true
         mPaintInnerView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
@@ -232,6 +310,7 @@ class RadialProgressBar : View {
         val addVal = stroke + 10f
         val subVal = (stroke + paddingView + 10f)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
+        mCenterDiameter = diameter - 2*subVal
         mPaintCenterView.strokeWidth = stroke
         mPaintCenterView.isAntiAlias = true
         mPaintCenterView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
@@ -279,7 +358,7 @@ class RadialProgressBar : View {
         val stroke = (diameter / 8).toFloat()
         val oval = RectF(paddingView, paddingView, diameter - paddingView, diameter - paddingView)
         mPaintOuterView.strokeWidth = stroke
-
+        mOuterDiameter = diameter - 2*paddingView
         mPaintOuterView.isAntiAlias = true
         mPaintOuterView.strokeCap = if (mRoundedCorners) Paint.Cap.ROUND else Paint.Cap.BUTT
         mPaintOuterView.style = Paint.Style.STROKE
@@ -368,6 +447,38 @@ class RadialProgressBar : View {
             else -> 0F
         }
     }
+
+
+    /**
+     * @return Process for Outer ProgressView
+     * @param sweepAngle SweepAngle
+     * */
+    private fun calcProgressFromOuterSweepAngle(sweepAngle: Float): Int {
+        return (mMaxProgressOuterView / mMaxSweepAngle * sweepAngle).toInt()
+    }
+
+    /**
+     * @return Process for Inner ProgressView
+     * @param sweepAngle SweepAngle
+     * */
+    private fun calcProgressFromInnerSweepAngle(sweepAngle: Float): Int {
+        return when {
+            !(hasOneProgressView && hasTwoProgressView) -> (mMaxProgressOuterView / mMaxSweepAngle * sweepAngle).toInt()
+            else -> 0
+        }
+    }
+    /**
+     * @return Process for Center ProgressView
+     * @param sweepAngle SweepAngle
+     * */
+    private fun calcProgressFromCenterSweepAngle(sweepAngle: Float): Int {
+        return when {
+            !(hasOneProgressView && !hasTwoProgressView) -> (mMaxProgressOuterView / mMaxSweepAngle * sweepAngle).toInt()
+            else -> 0
+        }
+    }
+
+
 
     /**
      * @return outer progress value
