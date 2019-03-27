@@ -155,24 +155,30 @@ class RadialProgressBar : View {
                             && isOuterClickable ->{
                         setOuterProgress(calcProgressFromOuterSweepAngle(touchAngle))
                     }
-                    // if touched on outer inner circle
-                    distToCenter > mInnerDiameter/2 - mPaintInnerView.strokeWidth/2
-                            && distToCenter < mInnerDiameter/2 + mPaintInnerView.strokeWidth/2
-                            && isInnerClickable ->{
-                        setInnerProgress(calcProgressFromInnerSweepAngle(touchAngle))
-                    }
+
                     // if touched on center circle
                     distToCenter > mCenterDiameter/2 - mPaintCenterView.strokeWidth/2
                             && distToCenter < mCenterDiameter/2 + mPaintCenterView.strokeWidth/2
-                            && isCenterClickable->{
+                            && isCenterClickable
+                            && !(hasOneProgressView && !hasTwoProgressView) ->{
                         setCenterProgress(calcProgressFromCenterSweepAngle(touchAngle))
                     }
+
+                    // if touched on outer inner circle
+                    distToCenter > mInnerDiameter/2 - mPaintInnerView.strokeWidth/2
+                            && distToCenter < mInnerDiameter/2 + mPaintInnerView.strokeWidth/2
+                            && isInnerClickable
+                            && !(hasOneProgressView && hasTwoProgressView) ->{
+                        setInnerProgress(calcProgressFromInnerSweepAngle(touchAngle))
+                    }
+
                 }
             }
         }
         return true
 
     }
+
 
 
     /**
@@ -830,5 +836,24 @@ class RadialProgressBar : View {
         hasTwoProgressView = value
         invalidate()
     }
+
+    fun setViewClickable(value: Boolean){
+        isViewClickable = value
+    }
+
+    fun setCenterClickable(value: Boolean) {
+        if(!(hasOneProgressView && !hasTwoProgressView))
+            isCenterClickable = value
+    }
+
+    fun setInnerClickable(value: Boolean) {
+        if (!(hasOneProgressView && hasTwoProgressView))
+            isInnerClickable = value
+    }
+
+    fun setOuterClickable(value: Boolean) {
+        isOuterClickable = value
+    }
+
 
 }

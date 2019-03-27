@@ -93,6 +93,10 @@ thats it and how you can use the RadialProgressView in your project.
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
 |Set Only OuterProgress|app:hasOneProgressView="true/false"|rpb.setOneProgressView(true/false)|false|
 |Set Only Outer and CenterProgress|app:hasTwoProgressView="true/false"|rpb.setTwoProgressView(true/false)|false|
+|Set View Clickable|app:isViewClickable="true/false"|rpb.setViewClickable(true/false)|false|
+|Set OuterProgress Clickable|app:isOuterClickable="true/false"|rpb.setOuterClickable(true/false)|true|
+|Set InnerProgress Clickable|app:isCenterClickable="true/false"|rpb.setCenterClickable(true/false)|true|
+|Set InnerProgress Clickable|app:isInnerClickable="true/false"|rpb.setInnerClickable(true/false)|true|
 
 > **angle = 0/90/180/270
 
@@ -133,4 +137,5 @@ For Gradient Shade,
 Contributor
  * [Himanshu Singh](https://github.com/hi-manshu)
  * [Akshay Nandwana](https://github.com/anandwana001)
+ * [Ketan Chaudhari](https://github.com/wiwium)
 

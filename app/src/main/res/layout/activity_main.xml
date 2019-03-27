@@ -19,7 +19,7 @@
             app:isAnimationOn="true"
             app:isViewClickable="true"
             app:isCenterClickable="false"
-            app:hasTwoProgressView="false"
+            app:hasTwoProgressView="true"
             app:hasOneProgressView="false"/>
 
 </RelativeLayout>
