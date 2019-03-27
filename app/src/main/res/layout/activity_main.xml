@@ -18,8 +18,7 @@
             android:layout_centerInParent="true"
             app:isAnimationOn="true"
             app:isViewClickable="true"
-            app:isCenterClickable="false"
-            app:hasTwoProgressView="true"
+            app:hasTwoProgressView="false"
             app:hasOneProgressView="false"/>
 
 </RelativeLayout>

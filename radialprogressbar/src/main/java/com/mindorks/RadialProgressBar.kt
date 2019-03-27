@@ -51,6 +51,10 @@ class RadialProgressBar : View {
     private var isCenterClickable = true
     private var isOuterClickable = true
 
+    private var isOuterDragging = false
+    private var isCenterDragging = false
+    private var isInnerDragging = false
+
     /**
      * Common vars
      */
@@ -108,7 +112,7 @@ class RadialProgressBar : View {
     private var mInnerColor = ArrayList<Int>()
 
     /**
-     * @onDraw draws all the Layout on Screen
+    * @onDraw draws all the Layout on Screen
      */
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -134,45 +138,65 @@ class RadialProgressBar : View {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         if(!isViewClickable) return false
-        val touchX = event!!.x
+        if (event == null) return false
+        val touchX = event.x
         val touchY = event.y
 
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                // get touch angle from view center
-                val touchAngle = calTouchAngle(touchX,touchY)
-
                 // calculate touch distance form center
+
                 val dX2 = Math.pow((mViewWidth/2).toDouble() - touchX, 2.0).toFloat()
                 val dY2 = Math.pow((mViewHeight/2).toDouble() - touchY, 2.0).toFloat()
                 val distToCenter = Math.sqrt((dX2 + dY2).toDouble()).toFloat()
-
-                // No need to check for display only two or one as condition will not satisfy
                 when{
                     // if touched on outer circle
                     distToCenter > mOuterDiameter/2 - mPaintOuterView.strokeWidth/2
                             && distToCenter < mOuterDiameter/2 + mPaintOuterView.strokeWidth/2
                             && isOuterClickable ->{
-                        setOuterProgress(calcProgressFromOuterSweepAngle(touchAngle))
+                        isOuterDragging = true
                     }
-
                     // if touched on center circle
                     distToCenter > mCenterDiameter/2 - mPaintCenterView.strokeWidth/2
                             && distToCenter < mCenterDiameter/2 + mPaintCenterView.strokeWidth/2
-                            && isCenterClickable
-                            && !(hasOneProgressView && !hasTwoProgressView) ->{
-                        setCenterProgress(calcProgressFromCenterSweepAngle(touchAngle))
+                            && isCenterClickable && !(hasOneProgressView && !hasTwoProgressView) ->{
+                        isCenterDragging = true
                     }
 
                     // if touched on outer inner circle
                     distToCenter > mInnerDiameter/2 - mPaintInnerView.strokeWidth/2
                             && distToCenter < mInnerDiameter/2 + mPaintInnerView.strokeWidth/2
-                            && isInnerClickable
-                            && !(hasOneProgressView && hasTwoProgressView) ->{
-                        setInnerProgress(calcProgressFromInnerSweepAngle(touchAngle))
+                            && isInnerClickable && !(hasOneProgressView && hasTwoProgressView) ->{
+                        isInnerDragging = true
                     }
 
                 }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val touchAngle = calTouchAngle(touchX,touchY)
+                when {
+                    isOuterDragging -> {
+                        mSweepAngleOuterView = touchAngle.toInt()
+                        mOuterProgress = calcProgressFromOuterSweepAngle(touchAngle)
+                        invalidate()
+                    }
+                    isInnerDragging ->{
+                        mSweepAngleInnerView = touchAngle.toInt()
+                        mInnerProgress = calcProgressFromInnerSweepAngle(touchAngle)
+                        invalidate()
+                    }
+                    isCenterDragging -> {
+                        mSweepAngleCenterView = touchAngle.toInt()
+                        mCenterProgress = calcProgressFromCenterSweepAngle(touchAngle)
+                        invalidate()
+                    }
+                }
+
+            }
+            MotionEvent.ACTION_UP,MotionEvent.ACTION_CANCEL -> {
+                isOuterDragging = false
+                isCenterDragging = false
+                isInnerDragging = false
             }
         }
         return true
