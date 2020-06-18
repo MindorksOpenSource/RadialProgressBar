@@ -30,5 +30,7 @@
         <attr name="hasEmptyProgressBar" format="boolean"/>
         <attr name="hasOneProgressView" format="boolean"/>
         <attr name="hasTwoProgressView" format="boolean"/>
+        <attr name="circleThickness" format="float"/>
+        <attr name="circlePadding" format="float"/>
     </declare-styleable>
 </resources>

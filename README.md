@@ -93,8 +93,11 @@ thats it and how you can use the RadialProgressView in your project.
 |Set MaxProgressValues|----|rpb.setMaxProgressValues(int,int,int)|----|
 |Set Only OuterProgress|app:hasOneProgressView="true/false"|rpb.setOneProgressView(true/false)|false|
 |Set Only Outer and CenterProgress|app:hasTwoProgressView="true/false"|rpb.setTwoProgressView(true/false)|false|
+|Set Circle Thickness***|app:circleThickness="float"|rpb.setCircleThickness(float)|1f|
+|Set Circle Padding|app:circlePadding="float"|rpb.setCirclePadding(float)|10f|
 
 > **angle = 0/90/180/270
+> **circle thickness between 0f to 1f
 
 You can also get value related to the RadialProgressView,
 
