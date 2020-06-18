@@ -97,7 +97,8 @@ thats it and how you can use the RadialProgressView in your project.
 |Set Circle Padding|app:circlePadding="float"|rpb.setCirclePadding(float)|10f|
 
 > **angle = 0/90/180/270
-> **circle thickness between 0f to 1f
+
+> ***circleThickness between 0f to 1f
 
 You can also get value related to the RadialProgressView,
 
