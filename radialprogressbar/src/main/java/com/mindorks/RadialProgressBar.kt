@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
  */
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
-class RadialProgressBar : View {
+open class RadialProgressBar : View {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
