@@ -20,7 +20,8 @@ import kotlin.collections.ArrayList
  * @author Himanshu Singh
  */
 
-class RadialProgressBar : View {
+@Suppress("MemberVisibilityCanBePrivate", "unused")
+open class RadialProgressBar : View {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
@@ -52,6 +53,8 @@ class RadialProgressBar : View {
     private var backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var hasOneProgressView = false
     private var hasTwoProgressView = false
+    private var mCircleThickness = 1f
+    private var mCirclePadding = 10f
 
     /**
      * Data of the Outer View
@@ -146,6 +149,8 @@ class RadialProgressBar : View {
             a.getColor(R.styleable.RadialProgressBar_outerEmptyProgressColor, mEmptyProgressColorOuterView)
         mEmptyProgressColorInnerView =
             a.getColor(R.styleable.RadialProgressBar_innerEmptyProgressColor, mEmptyProgressColorInnerView)
+        mCircleThickness = a.getFloat(R.styleable.RadialProgressBar_circleThickness, mCircleThickness)
+        mCirclePadding = a.getFloat(R.styleable.RadialProgressBar_circlePadding, mCirclePadding)
         a.recycle()
         hasElevation(mElevation)
         hasOneProgressView(hasOneProgressView)
@@ -171,6 +176,8 @@ class RadialProgressBar : View {
         setStartAngleCenterView(mStartAngleCenterView)
         setStartAngleInnerView(mStartAngleInnerView)
         setStartAngleOuterView(mStartAngleOuterView)
+        setCircleThickness(mCircleThickness)
+        setCirclePadding(mCirclePadding)
 
     }
 
@@ -180,9 +187,9 @@ class RadialProgressBar : View {
     private fun drawInnerProgressView(canvas: Canvas?) {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
-        val stroke = (diameter / 8).toFloat()
-        val addVal = (stroke * 2) + 20f
-        val subVal = ((stroke * 2) + paddingView + 20f)
+        val stroke = (diameter / 8).toFloat() * mCircleThickness
+        val addVal = (stroke * 2) + 2 * mCirclePadding
+        val subVal = ((stroke * 2) + paddingView + 2 * mCirclePadding)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintInnerView.strokeWidth = stroke
         mPaintInnerView.isAntiAlias = true
@@ -228,9 +235,9 @@ class RadialProgressBar : View {
     private fun drawCenterProgressView(canvas: Canvas?) {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
-        val stroke = (diameter / 8).toFloat()
-        val addVal = stroke + 10f
-        val subVal = (stroke + paddingView + 10f)
+        val stroke = (diameter / 8).toFloat() * mCircleThickness
+        val addVal = stroke + mCirclePadding
+        val subVal = (stroke + paddingView + mCirclePadding)
         val oval = RectF(paddingView + addVal, paddingView + addVal, diameter - subVal, diameter - subVal)
         mPaintCenterView.strokeWidth = stroke
         mPaintCenterView.isAntiAlias = true
@@ -276,7 +283,7 @@ class RadialProgressBar : View {
     private fun drawOuterProgressView(canvas: Canvas?) {
         val diameter = Math.min(mViewWidth, mViewHeight)
         val paddingView = (diameter / 16.0).toFloat()
-        val stroke = (diameter / 8).toFloat()
+        val stroke = (diameter / 8).toFloat() * mCircleThickness
         val oval = RectF(paddingView, paddingView, diameter - paddingView, diameter - paddingView)
         mPaintOuterView.strokeWidth = stroke
 
@@ -449,6 +456,20 @@ class RadialProgressBar : View {
             !(hasOneProgressView && !hasTwoProgressView) -> this.mMaxProgressCenterView
             else -> 0
         }
+    }
+
+    /**
+    @return thickness for the progress views
+     */
+    fun getCircleThickness(): Float {
+        return mCircleThickness
+    }
+
+    /**
+    @return padding between the progress views
+     */
+    fun getCirclePadding(): Float {
+        return mCirclePadding
     }
 
     /**
@@ -717,6 +738,27 @@ class RadialProgressBar : View {
      */
     fun hasTwoProgressView(value: Boolean) {
         hasTwoProgressView = value
+        invalidate()
+    }
+
+    /**
+    set the thickness for the progress views
+    value should be between 0f to 1f
+     */
+    fun setCircleThickness(value: Float) {
+        mCircleThickness = when {
+            value < 0f -> 0f
+            value > 1f -> 1f
+            else -> value
+        }
+        invalidate()
+    }
+
+    /**
+    set the padding between the progress views
+     */
+    fun setCirclePadding(value: Float) {
+        mCirclePadding = value
         invalidate()
     }
 
