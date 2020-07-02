@@ -30,7 +30,7 @@ allprojects {
 ##### Step 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.2'
+	        implementation 'com.github.MindorksOpenSource:RadialProgressBar:v1.3'
 	}
 ```
 
