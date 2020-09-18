@@ -528,7 +528,7 @@ open class RadialProgressBar : View {
     Set the   Progress of Outer Progress View
      */
     fun setOuterProgress(progress: Int) {
-        if (progress != 0) mOuterProgress = progress
+        mOuterProgress = progress
         val animator =
                 ValueAnimator.ofFloat(mSweepAngleOuterView.toFloat(), calcSweepAngleFromOuterProgress(mOuterProgress))
         animator.removeAllUpdateListeners()
@@ -634,7 +634,7 @@ open class RadialProgressBar : View {
      */
     fun setInnerProgress(progress: Int) {
         if (!(hasOneProgressView && hasTwoProgressView)) {
-            if (progress != 0) mInnerProgress = progress
+            mInnerProgress = progress
             val animator =
                     ValueAnimator.ofFloat(mSweepAngleInnerView.toFloat(), calcSweepAngleFromInnerProgress(mInnerProgress))
             animator.removeAllUpdateListeners()
@@ -665,7 +665,7 @@ open class RadialProgressBar : View {
      */
     fun setCenterProgress(progress: Int) {
         if (!(hasOneProgressView && !hasTwoProgressView)) {
-            if (progress != 0) mCenterProgress = progress
+            mCenterProgress = progress
             val animator =
                     ValueAnimator.ofFloat(
                             mSweepAngleCenterView.toFloat(),
@@ -728,6 +728,13 @@ open class RadialProgressBar : View {
     fun setCirclePadding(value: Float) {
         mCirclePadding = value
         invalidate()
+    }
+
+    /**
+    clear all the progress rings
+     */
+    fun clearAllProgress() {
+       setProgressValues(0,0,0)
     }
 
 }
